@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kariyer & İletişim Stüdyosu | Profesyonel Kariyer ve Sınav Hazırlık Platformu</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Google Fonts: Plus Jakarta Sans, JetBrains Mono, Crimson Pro -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css?v=7">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              900: '#312e81',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white">
+
+  <!-- ================= TOP APP HEADER ================= -->
+  <header id="app-header" class="no-print bg-slate-900/95 border-b border-slate-800 sticky top-0 z-40 backdrop-blur-md px-4 py-2.5 shadow-lg">
+    <div class="max-w-[1920px] mx-auto flex items-center justify-between gap-4">
+      
+      <!-- Brand & Title -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-sky-500 flex items-center justify-center text-white shadow-lg shadow-indigo-500/25">
+          <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="font-extrabold text-base tracking-tight text-white">Kariyer & İletişim Stüdyosu</h1>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">Vize & Kariyer Hazırlık</span>
+          </div>
+          <p class="text-[11px] text-slate-400 font-medium">SWOT • GROW • Harvard ATS CV • Niyet Mektubu • Konuk Raporu</p>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center flex-wrap gap-2">
+        <!-- Save indicator -->
+        <div id="save-indicator" class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700/60 text-xs">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span class="text-slate-400">Kaydedildi</span>
+        </div>
+
+        <!-- Mobile/Narrow Screen View Switcher -->
+        <div class="lg:hidden flex items-center bg-slate-800 rounded-lg p-0.5 border border-slate-700 text-xs">
+          <button id="btn-show-editor" onclick="toggleMobileView('editor')" class="px-2.5 py-1 rounded bg-indigo-600 text-white font-semibold">Form</button>
+          <button id="btn-show-preview" onclick="toggleMobileView('preview')" class="px-2.5 py-1 rounded text-slate-300 font-medium">Önizleme</button>
+        </div>
+
+        <!-- Sample Data Button -->
+        <button onclick="loadSampleData()" class="px-2.5 sm:px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white border border-slate-700 text-xs font-semibold flex items-center gap-1.5 transition-all" title="Örnek Mühendislik ve Kariyer Verilerini Yükle">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-400"></i>
+          <span class="hidden sm:inline">Örnek Veri Yükle</span>
+          <span class="sm:hidden">Örnek</span>
+        </button>
+
+        <!-- Import / Export Dropdown / Buttons -->
+        <div class="hidden sm:flex items-center bg-slate-800 border border-slate-700 rounded-lg overflow-hidden">
+          <button onclick="exportDataJson()" class="px-2.5 py-1.5 text-slate-300 hover:text-white hover:bg-slate-700 text-xs font-medium flex items-center gap-1" title="JSON Olarak İndir / Yedekle">
+            <i data-lucide="download" class="w-3.5 h-3.5 text-sky-400"></i>
+            <span>Yedekle</span>
+          </button>
+          <label class="px-2.5 py-1.5 text-slate-300 hover:text-white hover:bg-slate-700 text-xs font-medium flex items-center gap-1 cursor-pointer border-l border-slate-700" title="JSON Yedek Dosyasından Yükle">
+            <i data-lucide="upload" class="w-3.5 h-3.5 text-emerald-400"></i>
+            <span>İçe Aktar</span>
+            <input type="file" id="import-json-file" accept=".json" class="hidden" onchange="importDataJson(event)">
+          </label>
+        </div>
+
+        <!-- Reset Button -->
+        <button onclick="resetAllData()" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-rose-950 text-slate-400 hover:text-rose-400 border border-slate-700 hover:border-rose-800 text-xs font-medium flex items-center gap-1 transition-all" title="Varsayılan Verilere Sıfırla">
+          <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+          <span class="hidden sm:inline">Sıfırla</span>
+        </button>
+
+        <!-- PRIMARY PRINT / PDF BUTTON -->
+        <button onclick="printDocument()" class="px-3.5 sm:px-4 py-1.5 rounded-lg bg-gradient-to-r from-indigo-500 to-sky-500 hover:from-indigo-600 hover:to-sky-600 text-white font-bold text-xs flex items-center gap-2 shadow-lg shadow-indigo-500/25 transition-all transform hover:scale-[1.02] active:scale-100">
+          <i data-lucide="printer" class="w-4 h-4"></i>
+          <span>PDF / Yazdır</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ================= MODULE NAVIGATION TABS ================= -->
+  <nav id="navigation-tabs" class="no-print bg-slate-900 border-b border-slate-800 px-4 py-2 sticky top-[61px] z-30">
+    <div class="max-w-[1920px] mx-auto flex items-center justify-between gap-3 overflow-x-auto">
+      
+      <!-- Module Switcher Tabs -->
+      <div class="flex items-center gap-1.5">
+        <button data-tab="swot" onclick="switchTab('swot')" class="nav-tab-btn px-4 py-2 text-xs font-medium rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 flex items-center gap-2 border border-transparent transition-all">
+          <i data-lucide="grid" class="w-4 h-4"></i>
+          <span>1. SWOT Analizi</span>
+        </button>
+
+        <button data-tab="grow" onclick="switchTab('grow')" class="nav-tab-btn px-4 py-2 text-xs font-medium rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 flex items-center gap-2 border border-transparent transition-all">
+          <i data-lucide="trending-up" class="w-4 h-4"></i>
+          <span>2. GROW Analizi</span>
+        </button>
+
+        <button data-tab="cv" onclick="switchTab('cv')" class="nav-tab-btn active px-4 py-2 text-xs font-bold rounded-lg bg-indigo-600 text-white shadow-md shadow-indigo-600/30 flex items-center gap-2 border border-indigo-500 transition-all">
+          <i data-lucide="file-badge" class="w-4 h-4"></i>
+          <span>3. Harvard ATS CV</span>
+        </button>
+
+        <button data-tab="letter" onclick="switchTab('letter')" class="nav-tab-btn px-4 py-2 text-xs font-medium rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 flex items-center gap-2 border border-transparent transition-all">
+          <i data-lucide="mail" class="w-4 h-4"></i>
+          <span>4. Niyet Mektubu (Soru-2)</span>
+        </button>
+
+        <button data-tab="guests" onclick="switchTab('guests')" class="nav-tab-btn px-4 py-2 text-xs font-medium rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 flex items-center gap-2 border border-transparent transition-all">
+          <i data-lucide="mic" class="w-4 h-4"></i>
+          <span>5. Konuk Değerlendirmeleri (Soru-1)</span>
+        </button>
+      </div>
+
+      <!-- Quick Guidance Pill -->
+      <div class="hidden xl:flex items-center gap-2 text-xs text-slate-400 bg-slate-950/60 px-3 py-1.5 rounded-lg border border-slate-800">
+        <i data-lucide="info" class="w-3.5 h-3.5 text-indigo-400"></i>
+        <span>Canlı önizleme A4 boyutuna göre ölçeklenir; yazdır butonuna basıldığında formlar gizlenip doğrudan vektörel A4 çıktısı alınır.</span>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- ================= MAIN WORKSPACE SPLIT CONTAINER ================= -->
+  <main id="workspace-container" class="flex-1 flex overflow-hidden">
+    
+    <!-- LEFT COLUMN: Dynamic Editor Panel -->
+    <section id="editor-panel" class="w-full lg:w-[48%] xl:w-[45%] h-[calc(100vh-110px)] overflow-y-auto p-4 lg:p-6 border-r border-slate-800 bg-slate-900/60">
+      <div id="editor-content" class="max-w-2xl mx-auto">
+        <!-- Injected via app.js depending on active tab -->
+      </div>
+    </section>
+
+    <!-- RIGHT COLUMN: Live A4 Paper Preview Stage -->
+    <section id="preview-container" class="hidden lg:flex flex-1 flex-col h-[calc(100vh-110px)] bg-slate-950 overflow-hidden relative">
+      
+      <!-- Preview Controls Toolbar -->
+      <div id="preview-controls" class="no-print bg-slate-900/90 border-b border-slate-800 px-4 py-2 flex items-center justify-between z-20 backdrop-blur-sm">
+        <div class="flex items-center gap-2 text-xs text-slate-300 font-semibold">
+          <i data-lucide="file-text" class="w-4 h-4 text-indigo-400"></i>
+          <span>Canlı A4 Sayfa Önizlemesi (210 × 297 mm)</span>
+          <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">Tek Sayfa Standardı</span>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <!-- Scale Controls -->
+          <div class="flex items-center bg-slate-800 rounded-lg p-0.5 border border-slate-700 text-xs">
+            <button onclick="setZoom('fit')" class="px-2 py-1 rounded text-slate-300 hover:text-white hover:bg-slate-700" title="Ekrana Sığdır">Sığdır</button>
+            <button onclick="setZoom('75')" class="px-2 py-1 rounded text-slate-300 hover:text-white hover:bg-slate-700">75%</button>
+            <button onclick="setZoom('100')" class="px-2 py-1 rounded text-slate-300 hover:text-white hover:bg-slate-700">100%</button>
+          </div>
+          <span id="zoom-display" class="text-[11px] text-slate-400 font-mono w-16 text-right">Sığdır</span>
+
+          <!-- Direct Print Action -->
+          <button onclick="printDocument()" class="px-3 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold flex items-center gap-1 shadow-sm">
+            <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+            <span>Yazdır</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Simulated Paper Viewport -->
+      <div class="paper-viewport flex-1 overflow-auto">
+        <!-- The simulated A4 sheet that is printed -->
+        <article id="a4-sheet" class="a4-sheet font-sans">
+          <!-- Injected via app.js depending on active tab -->
+        </article>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ================= TOAST CONTAINER ================= -->
+  <div id="toast-container" class="no-print fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- Application Script -->
+  <script src="app.js?v=7"></script>
+</body>
+</html>

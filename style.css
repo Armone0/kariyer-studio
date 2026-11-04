@@ -1,0 +1,429 @@
+/* Kariyer & İletişim Stüdyosu - Global Styles & Print Setup */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap');
+
+:root {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-serif: 'Crimson Pro', Georgia, serif;
+  
+  /* A4 Dimensions at 96 DPI: 210mm x 297mm ≈ 794px x 1123px */
+  --a4-width: 794px;
+  --a4-height: 1123px;
+  --a4-padding: 38px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #0f172a;
+  color: #1e293b;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar for editor */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.4);
+}
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* Chips & Badges */
+.chip-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 9999px;
+  background-color: rgba(30, 41, 59, 0.7);
+  color: #94a3b8;
+  border: 1px solid rgba(71, 85, 105, 0.35);
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  user-select: none;
+}
+.chip-btn:hover {
+  background-color: #1e293b;
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.5);
+  transform: translateY(-1px);
+}
+.chip-btn:active {
+  transform: translateY(0);
+}
+
+/* Paper Preview Stage */
+.paper-viewport {
+  background: radial-gradient(circle at 50% 30%, #1e293b 0%, #0b1120 100%);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 24px;
+  min-height: 100%;
+  overflow: auto;
+}
+
+/* The simulated A4 Sheet */
+.a4-sheet {
+  width: var(--a4-width);
+  min-height: var(--a4-height);
+  height: auto;
+  padding: var(--a4-padding);
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  position: relative;
+  transform-origin: top center;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Specific template styling inside A4 */
+.swot-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 16px;
+  flex: 1;
+}
+
+.swot-card {
+  border-radius: 6px;
+  padding: 16px 18px;
+  border: 1.5px solid #0f172a;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.swot-card.s-card,
+.swot-card.w-card,
+.swot-card.o-card,
+.swot-card.t-card {
+  background-color: #ffffff;
+  border-color: #0f172a;
+}
+
+/* GROW analysis timeline & cards */
+.grow-step-card {
+  border-radius: 6px;
+  border: 1.5px solid #0f172a;
+  padding: 14px 16px;
+  background: #ffffff;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.15s;
+}
+
+/* Report & Guest evaluation cards */
+.report-card {
+  border-radius: 6px;
+  border: 1.5px solid #0f172a;
+  padding: 14px 16px;
+  background: #ffffff;
+}
+
+.guest-card {
+  border: 2px solid #000000;
+  border-radius: 16px;
+  background-color: #ffffff;
+}
+
+/* =========================================================================
+   MONSTER.COM RESUME BUILDER - EXECUTIVE PROFESSIONAL CV STYLES
+   ========================================================================= */
+.cv-container {
+  font-family: var(--font-sans);
+  color: #0f172a;
+  line-height: 1.45;
+}
+
+.cv-header-monster {
+  text-align: center;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 2px solid #090d16;
+}
+
+.cv-name-monster {
+  font-size: 21pt;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  color: #090d16;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin: 0 0 3px 0;
+}
+
+.cv-title-monster {
+  font-size: 9.5pt;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #334155;
+  margin: 0 0 5px 0;
+}
+
+.cv-contact-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 3px 8px;
+  font-size: 8.5pt;
+  color: #475569;
+  font-weight: 500;
+}
+
+.cv-contact-bar span.sep {
+  color: #94a3b8;
+  font-weight: 700;
+  user-select: none;
+}
+
+.cv-contact-bar a, .cv-contact-bar .contact-link {
+  color: #090d16;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: 600;
+}
+
+.cv-section-title {
+  font-size: 9pt;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #1e293b;
+  border-bottom: 1px solid #cbd5e1;
+  padding-bottom: 2px;
+  margin-top: 7px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cv-entry-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.cv-entry-title {
+  font-weight: 600;
+  color: #0f172a;
+  font-size: 9.5pt;
+  letter-spacing: -0.01em;
+}
+
+.cv-entry-subtitle {
+  font-weight: 600;
+  color: #334155;
+  font-size: 9pt;
+}
+
+.cv-entry-date {
+  font-size: 8.5pt;
+  color: #475569;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.cv-entry-tech {
+  font-size: 8.5pt;
+  color: #334155;
+  margin-top: 1px;
+  margin-bottom: 2px;
+}
+
+.cv-entry-tech strong {
+  color: #090d16;
+  font-weight: 700;
+}
+
+.cv-bullet-list {
+  list-style-type: disc;
+  padding-left: 14px;
+  margin: 2px 0 3px 0;
+}
+
+.cv-bullet {
+  font-size: 9pt;
+  line-height: 1.4;
+  color: #1e293b;
+  margin-bottom: 1.5px;
+}
+
+.cv-skills-grid {
+  font-size: 9pt;
+  line-height: 1.45;
+  color: #1e293b;
+}
+
+.cv-skills-row {
+  margin-bottom: 2px;
+}
+
+.cv-skills-label {
+  font-weight: 800;
+  color: #090d16;
+  text-transform: uppercase;
+  font-size: 8.5pt;
+  letter-spacing: 0.02em;
+  margin-right: 4px;
+}
+
+/* PRINT MEDIA SETUP - Pure A4 Printing */
+@media print {
+  html, body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Hide everything except the printable A4 container */
+  .no-print,
+  #app-header,
+  #navigation-tabs,
+  #editor-panel,
+  #preview-controls,
+  #toast-container,
+  .modal-backdrop {
+    display: none !important;
+  }
+
+  #workspace-container {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  #preview-container {
+    display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    overflow: visible !important;
+  }
+
+  .paper-viewport {
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    display: block !important;
+  }
+
+  .a4-sheet {
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    transform: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    min-height: auto !important;
+    page-break-after: avoid;
+    page-break-inside: avoid;
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  /* Force monochrome high contrast for print */
+  .swot-card,
+  .grow-step-card,
+  .report-card,
+  .guest-card {
+    border: 2px solid #000000 !important;
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .guests-cards-container {
+    gap: 4mm !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    flex: 1 1 auto !important;
+  }
+
+  .guest-card {
+    border: 2px solid #000000 !important;
+    border-radius: 12px !important;
+    padding: 10px 14px !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    flex: 1 1 0% !important;
+    min-height: 0 !important;
+    max-height: 108mm !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+
+  .guests-page {
+    height: 258mm !important;
+    max-height: 258mm !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+    box-sizing: border-box !important;
+  }
+
+  .border-slate-900,
+  .border-slate-800 {
+    border-color: #000000 !important;
+  }
+
+  .border-slate-300,
+  .border-slate-200 {
+    border-color: #cbd5e1 !important;
+  }
+
+  .bg-slate-900 {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+  }
+
+  .bg-slate-50,
+  .bg-slate-100 {
+    background-color: #f8fafc !important;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 10mm 12mm 10mm 12mm;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
